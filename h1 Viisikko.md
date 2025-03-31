@@ -1,5 +1,10 @@
 # h1 Viisikko
 
+## käytetty kone:
+
+![image](https://github.com/user-attachments/assets/3ed8723a-55a7-4629-a9e7-941ed7040dc9)
+
+VirtualBox Debian 12 kautta
 ## x) Lue ja tiivistä 
 -  Salt ohjelman avulla voit käyttää tietokoneita etänä ja myös kokeilla sen komentoja paikallisesti, jolloin voit testata komennot ennen käyttöön ottoa.
 -  Salt komennot toimivat sekä linuxilla, että windowsilla.
@@ -95,6 +100,9 @@ summary kentässä 1 onnistunut toiminto, jossa yksi muutos koneelle tapahtunut,
 
 Näin myös kävi, eli Saltin idempotentti toimii kuten pitääkin, eli muutoksia tehdään vain jos koneen tila on halutusta tilasta poikkeava, muutoin vain todetaan operaatio onnistuneeksi.
 
+# LÄHTEET
 
+tero.karvinen.com
+https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/linux-deb.html
 
 
