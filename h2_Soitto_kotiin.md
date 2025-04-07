@@ -27,7 +27,7 @@ Käyttöjärjestelmän koontikäännös	19045.5679
   ![image](https://github.com/user-attachments/assets/75f55165-8351-4fac-92bb-0dc9daec96e9)
 
 -  uudelle koneelle kirjautuminen ssh:n kautta:    vagrant ssh t001
--  Poistuminen koneelta tapahtuu komennolla:     vagrant@t001$ exit
+-  Poistuminen koneelta tapahtuu komennolla: exit
 -  Luodut virtuaalikoneet pystyvät ottamaan yhteyden toisiinsa ja internettiin
 
 ![image](https://github.com/user-attachments/assets/62180e24-4166-40a1-ae5e-fa7d55c8456a)
@@ -59,7 +59,72 @@ Menin sivustolle https://developer.hashicorp.com/vagrant/install. Valitsin windo
 ![image](https://github.com/user-attachments/assets/bac691dc-e8f9-4fa9-8654-2d4e61c7ef5b)
 
 Hyväksyin sopimuksen ja painoin install. VirtualBox minulla jo on, joten sitä ei tarvitse asentaa.
-Asennuksen jälkeen kone piti käynnistää uudelleen.
+Asennuksen jälkeen kone piti käynnistää uudelleen. Käynnistyksen jälkeen menin komentokehoitteeseen ja kirjoitin vagrant version ja sain tulokseksi
+
+![image](https://github.com/user-attachments/assets/2cbd9685-bc8d-4eb0-9290-487b10444a16)
+
+## b) Linux vagrant
+Tein windows komentokehotteessa uuden kansion projektille: mkdir twohost
+sitten tein Vagrantfilen komennolla: vagrant init debian/bookworm64
+Tämän jälkeen korvasin Vagrantfilen sisällön tekemällä visual studio codella seuraavan ruby muotoisen sisällön:
+
+![image](https://github.com/user-attachments/assets/bf14981a-50eb-49e8-9c8a-72206319b185)
+
+Tämän pitäisi luoda kaksi virtuaalikonetta: t001 ja t002. Niille pitäisi tulla omat IP:t ja niiden pitäisi käyttää debian 12 bookworm linuxia.
+Sitten kokeillaan käynnistää koneet komennolla vagrant up: Komento käynnisti virtuaalikoneet ja antoi varsin pitkän selosteen tekemisistään. Kokeillaan vastaako t001 komennolla: ping 192.168.88.101
+
+![image](https://github.com/user-attachments/assets/299e27fd-9c20-42da-84c8-909db407723c)
+
+## c) Pingataan koneita toisillaan
+
+Nyt kun koneet ovat pystyssä, kirjaudutaan t001 koneelle: vagrant ssh t001
+Sitten kokeillaan t002 koneen pingaamista t001 koneelta: ping -c 1 192.168.88.102
+
+![image](https://github.com/user-attachments/assets/d0bb107f-ada9-4efe-8b86-1066302e1c7f)
+
+ja toisinpäin : ping -c 1 192.168.88.101
+
+![image](https://github.com/user-attachments/assets/f983d491-face-4fec-a3fe-d5794c3d08ec)
+
+## d) Herra-orja verkossa
+
+Asensin t001 koneelle salt-masterin ja t002 koneelle salt-minionin. Tein tämän Salt Install Guide: Linux (DEB) avulla.
+En nyt käy tätä vaihetta läpi sen kummemmin kun se oli jo edellisen viikon tehtävässä. Uutta tässä asennuksessa oli slave avaimen lähettäminen orjalta masterille. Eli lisäsin master koneen ip:n ja annoin orjalle nimen muokkaamalla tiedostoa 
+/etc/salt/minion. Lisäsin yläriville master: 192.168.88.101 ja toiselle riville id: trump. Eli orjan nimi on trump.
+testasin yhteyttä:
+![image](https://github.com/user-attachments/assets/7af7d1bb-bdf6-4704-b7be-9fa16db4b601)
+
+Yhteys näyttää toimivan
+
+## e) Slave testing
+Ajoin pkg asennuksen tree ohjelmalle:
+
+![image](https://github.com/user-attachments/assets/b3e30739-10d0-4cb1-99b9-e42f19bcbc26)
+
+Sitten tein userin slave koneelle
+
+![image](https://github.com/user-attachments/assets/9b58f921-2f92-4b33-adcd-7fbc6d6c7410)
+
+
+## LÄHTEET
+
+https://terokarvinen.com/palvelinten-hallinta/
+
+https://docs.saltproject.io/salt/install-guide/en/latest/topics/install-by-operating-system/linux-deb.html
+
+https://developer.hashicorp.com/tutorials/library?product=vagrant
+
+https://docs.saltproject.io/en/3006/topics/cloud/vagrant.html
+
+
+
+
+
+
+
+
+
+
 
 
 
